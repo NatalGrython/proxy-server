@@ -27,7 +27,7 @@ export class NodeService {
   async deleteNode(node: CreateNodeDto) {
     const currentNode = await this.nodeRepository.findOne({
       where: {
-        address: node.address,
+        host: node.host,
         port: node.port,
       },
     });

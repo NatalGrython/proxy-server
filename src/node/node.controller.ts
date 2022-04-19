@@ -34,9 +34,8 @@ export class NodeController {
     type: Node,
     status: 200,
   })
-  @ApiBearerAuth('jwt')
+ 
   @Get('/:id')
-  @UseGuards(JwtAuthGuard)
   getNode(@Param('id', NodeParamPipe) id: number) {
     return this.nodeService.getNode(id);
   }
@@ -46,9 +45,8 @@ export class NodeController {
     status: 200,
     isArray: true,
   })
-  @ApiBearerAuth('jwt')
+ 
   @Get()
-  @UseGuards(JwtAuthGuard)
   getAllNodes() {
     return this.nodeService.getAllNodes();
   }

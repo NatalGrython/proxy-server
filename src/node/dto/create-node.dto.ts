@@ -5,7 +5,7 @@ export class CreateNodeDto {
     title: 'Address node',
     example: '192.168.1.1',
   })
-  readonly address: string;
+  readonly host: string;
   @ApiProperty({
     title: 'Port node',
     example: 3000,

@@ -42,12 +42,12 @@ export class AuthService {
     const node = await this.nodeService.getNode(registrationDto.nodeId);
 
     const { privateKey, address } = await this.getBlockChainCreditionls(
-      node.address,
+      node.host,
       node.port,
     );
 
     if (registrationDto.role === 'teacher') {
-      await this.teacherSetBalance(node.address, node.port, address);
+      await this.teacherSetBalance(node.host, node.port, address);
     }
 
     const user = await this.userService.createUser({
@@ -84,7 +84,7 @@ export class AuthService {
         reason: 'Add new teacher',
         hard: true,
         addresses: nodes.map((item) => ({
-          host: item.address,
+          host: item.host,
           port: item.port,
         })),
       },

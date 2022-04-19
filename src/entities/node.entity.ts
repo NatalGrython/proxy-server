@@ -16,7 +16,7 @@ export class Node {
     example: '192.168.1.1',
   })
   @Column()
-  address: string;
+  host: string;
 
   @ApiProperty({
     title: 'Node port',

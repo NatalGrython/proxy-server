@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+    postgres:
+        image: postgres
+        environment:
+            POSTGRES_DB: proxy_db
+            POSTGRES_USER: proxy_user
+            POSTGRES_PASSWORD: '0000'
+        ports:
+            - '5432:5432'
+        restart: always
+    web:
+        build: .
+        ports:
+            - '5001:5000'
+        links:
+            - postgres
+        depends_on:
+            - postgres
+        environment:
+            DB_HOST: postgres
+            DB_PORT: 5432
+            DB_USERNAME: proxy_user
+            DB_PASSWORD: '0000'
+            DB_NAME: proxy_db

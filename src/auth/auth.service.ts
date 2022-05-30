@@ -65,7 +65,7 @@ export class AuthService {
     //{ port: number; host: string }[]
 
     const responseOwner = this.httpService.get<BlockChainCreditionls['user']>(
-      `http://${host}:${port}/owner`,
+      `http://${host}:${port}/api/owner`,
     );
 
     const owner = await firstValueFrom(
@@ -75,7 +75,7 @@ export class AuthService {
     const nodes = await this.nodeService.getAllNodes();
 
     const transactionResponse = this.httpService.post(
-      `http://${host}:${port}/transaction`,
+      `http://${host}:${port}/api/transaction`,
       {
         address: owner.address,
         privateKey: owner.privateKey,

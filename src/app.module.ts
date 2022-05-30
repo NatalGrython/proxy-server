@@ -5,9 +5,11 @@ import { User } from './entities/user.entity';
 import { NodeModule } from './node/node.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     NodeModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -15,12 +17,9 @@ import { AuthModule } from './auth/auth.module';
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database:  process.env.DB_NAME,
+      database: process.env.DB_NAME,
       synchronize: true,
       entities: [Node, User],
-      dropSchema: true,
-      migrationsRun: true,
-      autoLoadEntities: true,
     }),
     UserModule,
     AuthModule,

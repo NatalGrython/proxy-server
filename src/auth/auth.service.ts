@@ -100,7 +100,7 @@ export class AuthService {
     const response = this.httpService.get<BlockChainCreditionls>(
       `http://${host}:${port}/api/user`,
     );
-    return firstValueFrom(response.pipe(map((res) => res.data.user)));
+    return firstValueFrom(response.pipe(map((res) => res.data)));
   }
 
   generateToken(user: User) {

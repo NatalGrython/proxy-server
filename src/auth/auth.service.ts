@@ -98,7 +98,7 @@ export class AuthService {
 
   async getBlockChainCreditionls(host: string, port: number) {
     const response = this.httpService.get<BlockChainCreditionls>(
-      `http://${host}:${port}/user`,
+      `http://${host}:${port}/api/user`,
     );
     return firstValueFrom(response.pipe(map((res) => res.data.user)));
   }

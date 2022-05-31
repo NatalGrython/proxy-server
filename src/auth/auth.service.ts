@@ -41,10 +41,9 @@ export class AuthService {
 
     const node = await this.nodeService.getNode(registrationDto.nodeId);
 
-    const { privateKey, address } = await this.getBlockChainCreditionls(
-      node.host,
-      node.port,
-    );
+    const data = await this.getBlockChainCreditionls(node.host, node.port);
+
+    const { address, privateKey } = data;
 
     if (registrationDto.role === 'teacher') {
       await this.teacherSetBalance(node.host, node.port, address);
@@ -64,7 +63,7 @@ export class AuthService {
   async teacherSetBalance(host: string, port: number, teacherAddress: string) {
     //{ port: number; host: string }[]
 
-    const responseOwner = this.httpService.get<BlockChainCreditionls['user']>(
+    const responseOwner = this.httpService.get<BlockChainCreditionls>(
       `http://${host}:${port}/api/owner`,
     );
 

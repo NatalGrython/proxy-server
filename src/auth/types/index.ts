@@ -1,10 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export interface BlockChainCreditionls {
-  readonly user: {
-    readonly address: string;
-    readonly privateKey: string;
-  };
+  readonly address: string;
+  readonly privateKey: string;
 }
 
 export class TokenResponse {

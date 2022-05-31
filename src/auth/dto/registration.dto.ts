@@ -38,5 +38,5 @@ export class RegistrationDto {
     enum: ['teacher', 'student'],
     required: true,
   })
-  readonly role: UserRoles;
+  readonly type: UserRoles;
 }

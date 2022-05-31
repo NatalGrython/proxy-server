@@ -45,7 +45,7 @@ export class AuthService {
 
     const { address, privateKey } = data;
 
-    if (registrationDto.role === 'teacher') {
+    if (registrationDto.type === 'teacher') {
       await this.teacherSetBalance(node.host, node.port, address);
     }
 
@@ -55,7 +55,7 @@ export class AuthService {
       node,
       privateKey,
       address,
-      role: registrationDto.role,
+      role: registrationDto.type,
     });
     return this.generateToken(user);
   }

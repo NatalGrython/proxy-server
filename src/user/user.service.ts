@@ -18,7 +18,6 @@ export class UserService {
   getAllUsers() {
     return this.userRepository.find({
       relations: ['node'],
-      select: ['id', 'address', 'node', 'role', 'login'],
     });
   }
 

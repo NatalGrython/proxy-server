@@ -91,6 +91,9 @@ export class AuthService {
           port: item.port,
         })),
       },
+      {
+        timeout: 10000000,
+      },
     );
 
     const transaction = await firstValueFrom(

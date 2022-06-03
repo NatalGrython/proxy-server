@@ -42,6 +42,27 @@ export class User {
   login: string;
 
   @ApiProperty({
+    title: 'User name',
+    example: 'Кирилл',
+  })
+  @Column()
+  name: string;
+
+  @ApiProperty({
+    title: 'User surname',
+    example: 'Хорошилов',
+  })
+  @Column()
+  surname: string;
+
+  @ApiProperty({
+    title: 'User patronymic',
+    example: 'Сергеевич',
+  })
+  @Column()
+  patronymic: string;
+
+  @ApiProperty({
     title: 'User role',
     enum: ['teacher', 'student'],
   })

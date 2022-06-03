@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { NodeModule } from './node/node.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+//@ts-ignore
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

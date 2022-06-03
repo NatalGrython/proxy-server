@@ -34,7 +34,6 @@ export class NodeController {
     type: Node,
     status: 200,
   })
- 
   @Get('/:id')
   getNode(@Param('id', NodeParamPipe) id: number) {
     return this.nodeService.getNode(id);
@@ -45,7 +44,6 @@ export class NodeController {
     status: 200,
     isArray: true,
   })
- 
   @Get()
   getAllNodes() {
     return this.nodeService.getAllNodes();

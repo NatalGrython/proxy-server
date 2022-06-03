@@ -8,4 +8,7 @@ export class CreateUserDto {
   readonly node: Node;
   readonly privateKey: string;
   readonly address: string;
+  readonly name: string;
+  readonly surname: string;
+  readonly patronymic: string;
 }

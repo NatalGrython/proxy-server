@@ -25,10 +25,6 @@ export class AuthService {
   }
 
   async registration(registrationDto: RegistrationDto) {
-    if (registrationDto.password !== registrationDto.confirmPassword) {
-      throw new HttpException('Passoword not valid', 400);
-    }
-
     const candidate = await this.userService.getUserByLogin(
       registrationDto.login,
     );
@@ -39,25 +35,33 @@ export class AuthService {
 
     const passwordHash = await hash(registrationDto.password, 5);
 
-    const node = await this.nodeService.getNode(registrationDto.nodeId);
+    const nodes = await this.nodeService.getAllNodes();
 
-    const data = await this.getBlockChainCreditionls(node.host, node.port);
+    if (nodes.length) {
+      const node = nodes[0];
 
-    const { address, privateKey } = data;
+      const data = await this.getBlockChainCreditionls(node.host, node.port);
 
-    if (registrationDto.type === 'teacher') {
-      await this.teacherSetBalance(node.host, node.port, address);
+      const { address, privateKey } = data;
+
+      if (registrationDto.type === 'teacher') {
+        await this.teacherSetBalance(node.host, node.port, address);
+      }
+
+      const user = await this.userService.createUser({
+        password: passwordHash,
+        login: registrationDto.login,
+        node,
+        privateKey,
+        address,
+        role: registrationDto.type,
+        name: registrationDto.name,
+        surname: registrationDto.surname,
+        patronymic: registrationDto.patronymic,
+      });
+      return this.generateToken(user);
     }
-
-    const user = await this.userService.createUser({
-      password: passwordHash,
-      login: registrationDto.login,
-      node,
-      privateKey,
-      address,
-      role: registrationDto.type,
-    });
-    return this.generateToken(user);
+    throw new HttpException('No nodes', 500);
   }
 
   async teacherSetBalance(host: string, port: number, teacherAddress: string) {
